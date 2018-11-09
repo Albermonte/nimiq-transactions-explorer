@@ -1,7 +1,7 @@
 {
   "name": "nimiq-transactions-explorer",
   "version": "1.0.0",
-  "description": "A tool for knowing the total of NIM sended from one wallet to another ",
+  "description": "A tool for knowing the total of NIM sended from one wallet to another ",
   "author": "Albermonte <alberto.monterroso@hotmail.com>",
   "private": true,
   "scripts": {
