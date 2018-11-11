@@ -1,6 +1,5 @@
 function _onConsensusEstablished() {
     console.log(`On head: ${$.blockchain.height}`)
-    document.getElementById('consensus').innerHTML = $.consensus.established || false
 }
 
 function _onHeadChanged() {
@@ -17,7 +16,7 @@ function _onPeersChanged() {
             Nimiq.GenesisConfig.main();
             const $ = {};
             window.$ = $;
-            $.consensus = await Nimiq.Consensus.nano();
+            $.consensus = await Nimiq.Consensus.light();
 
             //$.wallet = await Nimiq.Wallet.generate();
 
@@ -29,7 +28,7 @@ function _onPeersChanged() {
             $.consensus.on('lost', () => console.error('Consensus lost'));
             $.network.on('peers-changed', () => _onPeersChanged());
             
-            $.network.connect();
+            //$.network.connect();
 
             // $.consensus.getAccount($.wallet.address)
             //     .then(account => _onBalanceChanged(account));
