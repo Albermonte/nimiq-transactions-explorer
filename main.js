@@ -1,14 +1,33 @@
-check_transactions = async () =>{
+check_transactions = async() => {
     const from_address = document.getElementById('from_address').value
     const to_address = document.getElementById('to_address').value
 
     let address_info = await fetch(`https://api-2.rawtx.io/v1/nim/addresses/${from_address}/`)
     address_info = await address_info.json()
-    const PAGE_SIZE = address_info.totalTransactions + 1
+    let PAGE_SIZE = address_info.totalTransactions + 1
+    console.log(`Page Size: ${PAGE_SIZE}`)
+    
+    let tx_array = null
+    if (PAGE_SIZE < 1000) {
+        tx_array = await fetch(`https://api-2.rawtx.io/v1/nim/addresses/${from_address}/transactions?pageSize=${PAGE_SIZE}`)
 
-    let tx_array = await fetch(`https://api-2.rawtx.io/v1/nim/addresses/${from_address}/transactions?pageSize=${PAGE_SIZE}`)
-    tx_array = await tx_array.json()
-    tx_array = tx_array.items
+        tx_array = await tx_array.json()
+        tx_array = tx_array.items
+    }
+    else {
+        tx_array = await fetch(`https://api-2.rawtx.io/v1/nim/addresses/${from_address}/transactions?pageSize=1000`)
+        tx_array = await tx_array.json()
+        tx_array = tx_array.items
+
+        for (let PAGE_NUMBER = 1; PAGE_NUMBER <= Math.ceil(PAGE_SIZE / 1000); PAGE_NUMBER++) {
+            console.log(PAGE_NUMBER)
+            let tx_array2 = await fetch(`https://api-2.rawtx.io/v1/nim/addresses/${from_address}/transactions?page=${PAGE_NUMBER}&pageSize=1000`)
+            tx_array2 = await tx_array2.json()
+            tx_array2 = tx_array2.items
+            tx_array = tx_array.concat(tx_array2)
+        }
+    }
+    console.log(tx_array)
 
 
     let sended_result = tx_array.filter(element => element.from == from_address);
