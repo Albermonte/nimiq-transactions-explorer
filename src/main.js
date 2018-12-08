@@ -21,7 +21,7 @@ Validator.extend('address', {
     },
     validate: (value) => {
         value = value.replace(/ /g, '');
-        value.substr(4) + value.substr(0, 4)
+        value = value.substr(4) + value.substr(0, 4)
 
         const num = value.split('').map((c) => {
             const code = c.toUpperCase().charCodeAt(0);
@@ -32,7 +32,7 @@ Validator.extend('address', {
         for (let i = 0; i < Math.ceil(num.length / 6); i++) {
             tmp = (parseInt(tmp + num.substr(i * 6, 6)) % 97).toString();
         }
-
+        
         if (parseInt(tmp) !== 1) {
             return false
         } else {

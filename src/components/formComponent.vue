@@ -3,18 +3,23 @@
     <div class="holder">
       <form @submit.prevent="checkForm">
         <div class="field">
-          <label class="label">Label</label>
+          <label class="label">From Address:</label>
           <div class="control">
-            <input class="input" name="address" type="text" placeholder="Enter a Nimiq Address..."  v-model="skill" v-validate="'address'">
-                <span v-if="errors.has('address')"> {{ errors.first('address') }} </span>
+            <input class="input" name="from_address" type="text" placeholder="Enter a Nimiq Address..."  v-model="from_address" v-validate="'address'">
+                <span v-if="errors.has('from_address')"> {{ errors.first('from_address') }} </span>
           </div>
-        </div>        
+        </div>    
+        <div class="field">
+          <label class="label">To Address:</label>
+          <div class="control">
+            <input class="input" name="to_address" type="text" placeholder="Enter a Nimiq Address..."  v-model="to_address" v-validate="'address'">
+                <span v-if="errors.has('to_address')"> {{ errors.first('to_address') }} </span>
+          </div>
+        </div>
+        <div class="control">
+          <button class="button is-primary" :disabled='this.errors.has("address")'>Submit</button>
+        </div>     
       </form>
-      
-
-      <ul>
-        <li v-for="(data, index) in skills" :key='index'>{{data.skill}}</li>
-      </ul>
     </div>
   </div>
 </template>
@@ -24,16 +29,16 @@ export default {
   name: "formComponent",
   data() {
     return {
-      skills: [{ skill: "Vue.js" }, { skill: "Frontend Developer" }],
-      skill: ""
+      from_address: "",
+      to_address: ""
     };
   },
   methods: {
     checkForm() {
       if (this.errors.has("address")) return;
-      this.skills.push({ skill: this.skill });
-      this.skill = "";
-      this.$emit("formIsOk");
+      this.$emit("formIsOk", this.from_address, this.to_address);
+      this.from_address = ""
+      this.to_address = ""
     }
   }
 };
