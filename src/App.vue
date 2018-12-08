@@ -44,7 +44,7 @@ html, body {
 }
 
 #app input:focus {
-  border-color: #00d1b2;  
+  border-color: #00d1b2;
 }
 
 #app .likes {
