@@ -2,9 +2,15 @@
   <div class="container">
     <div class="holder">
       <form @submit.prevent="checkForm">
-        <input name="address" type="text" placeholder="Enter a Nimiq Address..."  v-model="skill" v-validate="'address'">
-        <span v-if="errors.has('address')"> {{ errors.first('address') }} </span>
+        <div class="field">
+          <label class="label">Label</label>
+          <div class="control">
+            <input class="input" name="address" type="text" placeholder="Enter a Nimiq Address..."  v-model="skill" v-validate="'address'">
+                <span v-if="errors.has('address')"> {{ errors.first('address') }} </span>
+          </div>
+        </div>        
       </form>
+      
 
       <ul>
         <li v-for="(data, index) in skills" :key='index'>{{data.skill}}</li>
@@ -24,7 +30,7 @@ export default {
   },
   methods: {
     checkForm() {
-      if(this.errors.has('address')) return
+      if (this.errors.has("address")) return;
       this.skills.push({ skill: this.skill });
       this.skill = "";
       this.$emit("formIsOk");
@@ -62,14 +68,5 @@ p {
 
 .container {
   box-shadow: 0px 0px 40px lightgray;
-}
-
-input {
-  width: calc(100% - 40px);
-  border: 0;
-  padding: 20px;
-  font-size: 1.3em;
-  background-color: #323333;
-  color: #687f7f;
 }
 </style>

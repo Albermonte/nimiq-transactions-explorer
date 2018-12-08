@@ -1,8 +1,10 @@
 <template>
   <div class="columns">
     <div class="column">
+      <transition name="">
       <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK"/>
-      <tweetComponent v-else v-for="tweet in tweets" :tweet="tweet"/>
+      <tweetComponent v-else v-for="(tweet, index) in tweets" :tweet="tweet" :key="index"/>
+      </transition>
     </div>
   </div>
 </template>
