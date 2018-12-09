@@ -20,42 +20,4 @@ html, body {
   padding-top: 0px;
   text-align: center;
 }
-
-#app .button {
-  margin-bottom: 20px;
-}
-
-#app .box {
-  margin-bottom: 0;
-  border-radius: 15;
-}
-
-#app .content small {
-  color: #00d1b2;
-}
-
-#app img {
-  border-radius: 30px;
-}
-
-#app .level-item {
-  padding-left: 10px;
-  color: #00d1b2;
-}
-
-#app input:focus {
-  border-color: #00d1b2;
-}
-
-#app .likes {
-  padding: 0 7.5px;
-}
-
-#app input {
-  font-weight: bold;
-}
-
-#app .tweets-move {
-  transition: transform 1s;
-}
 </style>

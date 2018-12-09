@@ -6,6 +6,7 @@ import {
     Validator
 } from 'vee-validate';
 
+
 Vue.use(VeeValidate);
 
 Vue.config.productionTip = false;

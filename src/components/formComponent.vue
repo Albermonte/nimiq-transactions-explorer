@@ -4,20 +4,20 @@
       <form @submit.prevent="checkForm">
         <div class="field">
           <label class="label">From Address:</label>
-          <div class="control">
-            <input class="input" name="from_address" type="text" placeholder="Enter a Nimiq Address..."  v-model="from_address" v-validate="'address'">
+          <div v-bind:class="{control: true, 'is-loading': isLoading}">
+            <input class="input" name="from_address" type="text" placeholder="Enter a Nimiq Address..."  v-model="from_address" v-validate="'required|address'">
                 <span v-if="errors.has('from_address')"> {{ errors.first('from_address') }} </span>
           </div>
         </div>    
         <div class="field">
           <label class="label">To Address:</label>
-          <div class="control">
-            <input class="input" name="to_address" type="text" placeholder="Enter a Nimiq Address..."  v-model="to_address" v-validate="'address'">
+          <div v-bind:class="{control: true, 'is-loading': isLoading}">
+            <input class="input" name="to_address" type="text" placeholder="Enter a Nimiq Address..."  v-model="to_address" v-validate="'required|address'">
                 <span v-if="errors.has('to_address')"> {{ errors.first('to_address') }} </span>
           </div>
         </div>
         <div class="control">
-          <button class="button is-primary" :disabled='this.errors.has("address")'>Submit</button>
+          <button class="button is-primary" :disabled="isLoading">Submit</button>
         </div>     
       </form>
     </div>
@@ -30,15 +30,20 @@ export default {
   data() {
     return {
       from_address: "",
-      to_address: ""
+      to_address: "",
+      isLoading: false
     };
   },
   methods: {
     checkForm() {
-      if (this.errors.has("address")) return;
-      this.$emit("formIsOk", this.from_address, this.to_address);
-      this.from_address = ""
-      this.to_address = ""
+       this.$validator.validateAll().then((result) => {
+          if (result) { 
+            this.$emit("formIsOk", this.from_address, this.to_address);
+            this.isLoading = true
+          } else {
+            console.log('Not valid');
+          }
+        })
     }
   }
 };
