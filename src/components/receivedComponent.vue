@@ -4,7 +4,10 @@
       <article class="media">
         <div class="media-left">
           <figure class="image is-64x64">
-            <img v-bind:src="'https://icon.mopsus.com/icon/' + tx.from_address + '.128.png'" alt="Image">
+            <img
+              v-bind:src="'https://icon.mopsus.com/icon/' + tx.from_address + '.128.png'"
+              alt="Image"
+            >
           </figure>
         </div>
         <div class="media-content">
@@ -12,16 +15,16 @@
             <p>
               <strong>{{tx.from_address}}</strong>
               <br>
-              {{tx.hash}}
+              <span style="cursor: pointer" v-on:click="openInNewTab(tx.hash)">{{tx.hash}}</span>
             </p>
           </div>
           <div class="level-left">
-            <a class="level-item">
+            <div class="level-item">
               <span class="icon is-small">
                 <i class="fas fa-dollar-sign"></i>
               </span>
               <span class="NIM">{{tx.value/100000}} NIM</span>
-            </a>
+            </div>
           </div>
         </div>
       </article>
@@ -34,6 +37,12 @@ export default {
   name: "receivedComponent",
   props: {
     tx: Object
+  },
+  methods: {
+    openInNewTab(hash) {
+      var win = window.open(`https://nimiq.watch/#${hash}`, "_blank");
+      win.focus();
+    }
   }
 };
 </script>
@@ -62,9 +71,9 @@ export default {
 }
 
 /* Ajusta tamaño de letra cuando el width es más grande que la caja, así nunca se saldrá el texto de ella*/
-@media screen and (min-width: 680px) { 
+@media screen and (min-width: 680px) {
   .content {
-     font-size: 16px;
+    font-size: 16px;
   }
 }
 
