@@ -15,7 +15,7 @@ NIMTE is a Nimiq Transaction Explorer, based on [NimiqX API](https://api.nimiqx.
 
 They are awesome tools but doesn't fit what I was looking for. 
 
-Nimiq Watch or other exlorer has too much information,
+Nimiq Watch or other exlporer has too much information,
 
 SushiPool Explorer was more what I was looking for but the experience on mobile is awful and too complicated.
 
