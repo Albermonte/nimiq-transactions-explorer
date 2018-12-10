@@ -21,13 +21,16 @@ SushiPool Explorer was more what I was looking for but the experience on mobile 
 
 Also NIMTE fits more what I need, especially for [NimiqSpin](https://nimiqspin.com/).
 
+
 **Why VueJS?**
 
 Wanted to learn it and this was the perfect excuse.
 
+
 **Can I contribute?**
 
 Of course, pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
 
 **Your code is horrible**
 
