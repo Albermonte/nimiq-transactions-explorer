@@ -14,8 +14,11 @@ NIMTE is a Nimiq Transaction Explorer, based on [NimiqX API](https://api.nimiqx.
 **Why not using [SushiPool Explorer](https://explorer.sushipool.com/)/[Nimiq Watch](https://nimiq.watch/)/etc... instead of this?**
 
 They are awesome tools but doesn't fit what I was looking for. 
+
 Nimiq Watch or other exlorer has too much information,
+
 SushiPool Explorer was more what I was looking for but the experience on mobile is awful and too complicated.
+
 Also NIMTE fits more what I need, especially for [NimiqSpin](https://nimiqspin.com/).
 
 **Why VueJS?**
