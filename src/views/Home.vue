@@ -45,7 +45,7 @@ export default {
       const api_key = "?api_key=c708fd4fe23e15d9e8aaae3e79d5b6b2";
       let check_address = "";
       let receiver_address = "";
-      let changed = false
+      let changed = false;
 
       let from_address_info = await fetch(
         `${cors_api}https://api.nimiqx.com/account/${from_address}/${api_key}`
@@ -67,7 +67,7 @@ export default {
       } else {
         check_address = to_address;
         receiver_address = from_address;
-        changed = true
+        changed = true;
       }
 
       let tx_array = await fetch(
@@ -122,19 +122,21 @@ export default {
 
       this.sended_total_NIM = Nimiq.Policy.satoshisToCoins(sended_total);
       this.received_total_NIM = Nimiq.Policy.satoshisToCoins(received_total);
-   
-      if(changed){
-      let temp_arr = []
-      let temp_Nim = 0
-      temp_arr = this.sended_array
-      this.sended_array = this.received_array
-      this.received_array = temp_arr
-      temp_Nim = this.sended_total_NIM
-      this.sended_total_NIM = this.received_total_NIM
-      this.received_total_NIM = temp_Nim
+
+      if (changed) {
+        let temp_arr = [];
+        let temp_Nim = 0;
+        temp_arr = this.sended_array;
+        this.sended_array = this.received_array;
+        this.received_array = temp_arr;
+        temp_Nim = this.sended_total_NIM;
+        this.sended_total_NIM = this.received_total_NIM;
+        this.received_total_NIM = temp_Nim;
       }
       console.log(
-        `Sended Total: ${this.sended_total_NIM}  Received Total: ${this.received_total_NIM}`
+        `Sended Total: ${this.sended_total_NIM}  Received Total: ${
+          this.received_total_NIM
+        }`
       );
 
       this.formOK = true;

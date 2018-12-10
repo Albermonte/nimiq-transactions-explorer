@@ -9,10 +9,13 @@
 </template>
 
 <style>
-html, body {
+html,
+body {
   height: 100%;
+  margin: 0;
   padding-top: 10px;
-  background: #e6ecf1;
+  background-image: linear-gradient(30deg, #0582CA, #265DD7);
+  background-size: cover;
 }
 
 #app {
