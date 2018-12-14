@@ -1,11 +1,29 @@
 <template>
   <div class="columns">
     <div class="column">
-      <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK" :progress=progress />
-      <a v-if="formOK" v-bind:class="{button:true, 'is-active': isSendedActive}" v-on:click="isSendedActive = true">Sended Total: {{sended_total_NIM}} NIM</a>
-      <a v-if="formOK" v-bind:class="{button:true, 'is-active': !isSendedActive}" v-on:click="isSendedActive = false">Received Total: {{received_total_NIM}} NIM</a>
-      <sendedComponent v-if="formOK && isSendedActive" v-for="(tx, index) in sended_array" :tx="tx" :key="index"/>
-      <receivedComponent v-if="formOK && !isSendedActive" v-for="(tx, index) in received_array" :tx="tx" :key="index"/>
+      <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK" :progress="progress" :from_address_value="this.$route.params.from_address" />
+      <a
+        v-if="formOK"
+        v-bind:class="{button:true, 'is-active': isSendedActive}"
+        v-on:click="isSendedActive = true"
+      >Sended Total: {{sended_total_NIM}} NIM</a>
+      <a
+        v-if="formOK"
+        v-bind:class="{button:true, 'is-active': !isSendedActive}"
+        v-on:click="isSendedActive = false"
+      >Received Total: {{received_total_NIM}} NIM</a>
+      <sendedComponent
+        v-if="formOK && isSendedActive"
+        v-for="(tx, index) in sended_array"
+        :tx="tx"
+        :key="index"
+      />
+      <receivedComponent
+        v-if="formOK && !isSendedActive"
+        v-for="(tx, index) in received_array"
+        :tx="tx"
+        :key="index"
+      />
     </div>
   </div>
 </template>
@@ -35,8 +53,20 @@ export default {
       received_array: []
     };
   },
+  mounted() {
+    if (
+      this.$route.params.from_address != null &&
+      this.$route.to_address != null
+    ) {
+      this.check_transactions(
+        this.$route.params.from_address,
+        this.$route.params.to_address
+      );
+    }
+  },
   methods: {
     set_form_to_OK(from_address, to_address) {
+      this.$router.push(`/from/${from_address}/to/${to_address}`);
       this.check_transactions(from_address, to_address);
     },
     async check_transactions(from_address, to_address) {
@@ -89,7 +119,7 @@ export default {
         tx_array = tx_array.concat(tx_array_temp);
         console.log(`Page: ${i / 100}`);
         i += 100;
-        this.progress = (i / 100) / (total_PAGES-1) * 100; // Next page / Total pages * 100% 
+        this.progress = (i / 100 / (total_PAGES - 1)) * 100; // Next page / Total pages * 100%
         if (tx_array_temp.length < 100) stop = true;
       }
 
