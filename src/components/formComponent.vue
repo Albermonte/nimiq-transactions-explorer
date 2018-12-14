@@ -2,7 +2,7 @@
   <section class="is-fullheight">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <div class="column is-4 is-offset-4">
+        <div class="column">
           <div class="box">
             <form @submit.prevent="checkForm">
               <div class="field">
@@ -39,11 +39,12 @@
                   </div>
                 </div>
               </div>
+              <progress v-if="progress>0" class="progress is-primary" v-bind:value="progress" max="100">0%</progress>
               <div class="control">
                 <button
                   class="button is-block is-info is-large is-fullwidth"
                   :disabled="isLoading"
-                >Check it!</button>
+                >Check it out!</button>
               </div>
             </form>
           </div>
@@ -56,6 +57,12 @@
 <script>
 export default {
   name: "formComponent",
+  props: {
+    progress: {
+      type: Number,
+      default: 0
+    }
+  },
   data() {
     return {
       from_address: "",
@@ -84,9 +91,7 @@ export default {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-.box {
-  margin-top: 50%;
-}
+
 input {
   font-weight: 300;
 }

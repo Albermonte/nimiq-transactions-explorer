@@ -14,8 +14,10 @@ body {
   height: 100%;
   margin: 0;
   padding-top: 10px;
-  background-image: linear-gradient(30deg, #0582CA, #265DD7);
+  background-image: linear-gradient(225deg, #265DD7, #0582CA); /* 180º + 45 º */
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #app {

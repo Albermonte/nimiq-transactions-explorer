@@ -18,13 +18,23 @@
               <span style="cursor: pointer" v-on:click="openInNewTab(tx.hash)">{{tx.hash}}</span>
             </p>
           </div>
+          <div class="level">
           <div class="level-left">
-            <div class="level-item">
+            <div class="level-item nq-red">
               <span class="icon is-small">
                 <i class="fas fa-dollar-sign"></i>
               </span>
               <span class="NIM">{{tx.value/100000}} NIM</span>
             </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item nq-blue">
+              <span class="icon is-small">
+                <i class="fas fa-calendar-day"></i>
+              </span>
+              <span class="NIM">{{(new Date(tx.timestamp * 1000)).toLocaleString()}}</span>
+            </div>
+          </div>
           </div>
         </div>
       </article>
@@ -88,7 +98,6 @@ img {
 .level-item {
   display: inline-block;
   margin-left: 2px;
-  color: #00d1b2;
 }
 
 input:focus {

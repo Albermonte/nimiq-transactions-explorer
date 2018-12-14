@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column">
-      <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK"/>
+      <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK" :progress=progress />
       <a v-if="formOK" v-bind:class="{button:true, 'is-active': isSendedActive}" v-on:click="isSendedActive = true">Sended Total: {{sended_total_NIM}} NIM</a>
       <a v-if="formOK" v-bind:class="{button:true, 'is-active': !isSendedActive}" v-on:click="isSendedActive = false">Received Total: {{received_total_NIM}} NIM</a>
       <sendedComponent v-if="formOK && isSendedActive" v-for="(tx, index) in sended_array" :tx="tx" :key="index"/>
@@ -30,6 +30,7 @@ export default {
       isSendedActive: true,
       sended_total_NIM: 0,
       received_total_NIM: 0,
+      progress: 0,
       sended_array: [],
       received_array: []
     };
@@ -46,6 +47,7 @@ export default {
       let check_address = "";
       let receiver_address = "";
       let changed = false;
+      let total_PAGES = 0;
 
       let from_address_info = await fetch(
         `${cors_api}https://api.nimiqx.com/account/${from_address}/${api_key}`
@@ -64,10 +66,12 @@ export default {
       if (from_PAGES <= to_PAGES) {
         check_address = from_address;
         receiver_address = to_address;
+        total_PAGES = from_PAGES;
       } else {
         check_address = to_address;
         receiver_address = from_address;
         changed = true;
+        total_PAGES = to_PAGES;
       }
 
       let tx_array = await fetch(
@@ -85,6 +89,7 @@ export default {
         tx_array = tx_array.concat(tx_array_temp);
         console.log(`Page: ${i / 100}`);
         i += 100;
+        this.progress = (i / 100) / (total_PAGES-1) * 100; // Next page / Total pages * 100% 
         if (tx_array_temp.length < 100) stop = true;
       }
 
