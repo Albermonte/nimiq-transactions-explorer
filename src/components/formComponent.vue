@@ -63,6 +63,16 @@ export default {
       default: 0
     }
   },
+  mounted() {
+    if (
+      this.$route.params.from_address != null &&
+      this.$route.params.to_address != null
+    ) {
+      this.from_address = this.$route.params.from_address
+      this.to_address = this.$route.params.to_address
+      this.isLoading = true
+    }
+  },
   data() {
     return {
       from_address: "",

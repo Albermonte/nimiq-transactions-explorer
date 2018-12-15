@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column">
-      <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK" :progress="progress" :from_address_value="this.$route.params.from_address" />
+      <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK" :progress="progress" />
       <a
         v-if="formOK"
         v-bind:class="{button:true, 'is-active': isSendedActive}"
@@ -56,7 +56,7 @@ export default {
   mounted() {
     if (
       this.$route.params.from_address != null &&
-      this.$route.to_address != null
+      this.$route.params.to_address != null
     ) {
       this.check_transactions(
         this.$route.params.from_address,
