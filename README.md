@@ -1,4 +1,4 @@
-# NIMTE
+# NIMTE [![CodeFactor](https://www.codefactor.io/repository/github/albermonte/nimte/badge)](https://www.codefactor.io/repository/github/albermonte/nimte)
 
 NIMTE is a Nimiq Transaction Explorer, based on [NimiqX API](https://api.nimiqx.com/docs/about). Keeping it simple.
 
