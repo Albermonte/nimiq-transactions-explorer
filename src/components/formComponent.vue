@@ -68,9 +68,9 @@ export default {
       this.$route.params.from_address != null &&
       this.$route.params.to_address != null
     ) {
-      this.from_address = this.$route.params.from_address
-      this.to_address = this.$route.params.to_address
-      this.isLoading = true
+      this.from_address = this.$route.params.from_address;
+      this.to_address = this.$route.params.to_address;
+      this.isLoading = true;
     }
   },
   data() {
@@ -111,10 +111,10 @@ p {
 p.subtitle {
   padding-top: 1rem;
 }
-.button.is-info{
-  background-color: #21BCA5;
+.button.is-info {
+  background-color: #21bca5;
 }
-.button.is-info:hover{
+.button.is-info:hover {
   background-color: rgb(26, 180, 157);
 }
 </style>

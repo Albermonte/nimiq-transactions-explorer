@@ -12,6 +12,7 @@
         v-bind:class="{button:true, 'is-active': !isSendedActive}"
         v-on:click="isSendedActive = false"
       >Received Total: {{received_total_NIM}} NIM</a>
+      <transition-group name="flip-list">
       <sendedComponent
         v-if="formOK && isSendedActive"
         v-for="(tx, index) in sended_array"
@@ -24,6 +25,7 @@
         :tx="tx"
         :key="index"
       />
+      </transition-group>
     </div>
   </div>
 </template>
@@ -202,5 +204,8 @@ export default {
 <style scoped>
 .columns {
   margin-top: 0.75rem;
+}
+.flip-list-move {
+  transition: transform 1s;
 }
 </style>
