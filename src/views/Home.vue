@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column">
-      <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK" :progress="progress" />
+      <formComponent v-on:formIsOk="set_form_to_OK" v-if="!formOK" :progress="progress"/>
       <a
         v-if="formOK"
         v-bind:class="{button:true, 'is-active': isSendedActive}"
@@ -12,19 +12,19 @@
         v-bind:class="{button:true, 'is-active': !isSendedActive}"
         v-on:click="isSendedActive = false"
       >Received Total: {{received_total_NIM}} NIM</a>
-      <transition-group name="flip-list">
-      <sendedComponent
-        v-if="formOK && isSendedActive"
-        v-for="(tx, index) in sended_array"
-        :tx="tx"
-        :key="index"
-      />
-      <receivedComponent
-        v-if="formOK && !isSendedActive"
-        v-for="(tx, index) in received_array"
-        :tx="tx"
-        :key="index"
-      />
+      <transition-group name="swing" mode="in-out">
+        <sendedComponent
+          v-if="formOK && isSendedActive"
+          v-for="tx in sended_array"
+          :tx="tx"
+          :key="tx.timestamp"
+        />
+        <receivedComponent
+          v-if="formOK && !isSendedActive"
+          v-for="tx in received_array"
+          :tx="tx"
+          :key="tx.timestamp"
+        />
       </transition-group>
     </div>
   </div>
@@ -205,7 +205,69 @@ export default {
 .columns {
   margin-top: 0.75rem;
 }
-.flip-list-move {
-  transition: transform 1s;
+
+@-webkit-keyframes swing {
+  15% {
+    -webkit-transform: translateX(5px);
+    transform: translateX(5px);
+  }
+  30% {
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px);
+  }
+  50% {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+  }
+  65% {
+    -webkit-transform: translateX(-3px);
+    transform: translateX(-3px);
+  }
+  80% {
+    -webkit-transform: translateX(2px);
+    transform: translateX(2px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+@keyframes swing {
+  15% {
+    -webkit-transform: translateX(5px);
+    transform: translateX(5px);
+  }
+  30% {
+    -webkit-transform: translateX(-5px);
+    transform: translateX(-5px);
+  }
+  50% {
+    -webkit-transform: translateX(3px);
+    transform: translateX(3px);
+  }
+  65% {
+    -webkit-transform: translateX(-3px);
+    transform: translateX(-3px);
+  }
+  80% {
+    -webkit-transform: translateX(2px);
+    transform: translateX(2px);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+}
+
+.swing-enter-active, .swing-leave-active {
+  -webkit-animation: swing .75s ease;
+  animation: swing .75s ease;
+  transition: opacity .5s;
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+}
+
+.swing-enter, .swing-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>
