@@ -6,7 +6,7 @@ NIMTE is a Nimiq Transaction Explorer, based on [NimiqX API](https://api.nimiqx.
 
 1. Go to https://nimte.netlify.com/
 2. Enter the address where the transactions come from on the first input.
-3. Enter the address where the transactions have been sended on the second input.
+3. Enter the address where the transactions have been sent on the second input.
 4. Click on "Submit" and wait a few seconds.
 
 ## Why?
